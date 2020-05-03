@@ -58,7 +58,8 @@ class Genre(db.Model):
     __tablename__ = 'genre'
     id = db.Column(db.Integer, primary_key=True)
     genre = db.Column(db.String(20), nullable=False)
-    venue_id = db.Column(db.Integer, db.ForeignKey('venues.id'), nullable=False)
+    venue_id = db.Column(db.Integer,
+                         db.ForeignKey('venues.id'), nullable=False)
 
     def __repr__(self):
         return f'<Genre {self.id} {self.genre} {self.venue_id}>'
@@ -90,9 +91,12 @@ class Artist(db.Model):
 class Show(db.Model):
     __tablename__ = 'shows'
     id = db.Column(db.Integer, primary_key=True)
-    start_time = db.Column(db.DateTime, nullable=False)
-    venue_id = db.Column(db.Integer, db.ForeignKey('venues.id'), nullable=False)
-    artist_id = db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=False)
+    start_time = db.Column(db.DateTime,
+                           nullable=False)
+    venue_id = db.Column(db.Integer,
+                         db.ForeignKey('venues.id'), nullable=False)
+    artist_id = db.Column(db.Integer,
+                          db.ForeignKey('artists.id'), nullable=False)
 
     def __repr__(self):
         return f"<show_id: {self.id} venue_id: {self.venue_id} " \
@@ -358,9 +362,11 @@ def edit_artist_submission(artist_id):
         db.session.close()
 
     if not error:
-        flash('Artist ' + request.form['name'] + ' was successfully Updated')
+        flash('Artist ' + request.form['name'] +
+              ' was successfully Updated')
     else:
-        flash('An error occurred. Artist ' + request.form['name'] + ' can not be Updated.')
+        flash('An error occurred. Artist ' +
+              request.form['name'] + ' can not be Updated.')
 
     return redirect(url_for('show_artist', artist_id=artist_id))
 
@@ -402,7 +408,8 @@ def edit_venue_submission(venue_id):
         venue.genres = gen_list
         venue.facebook_link = request.form.get('facebook_link')
         venue.image_link = request.form.get('image_link')
-        if request.form.get('seeking_talent'): venue.seeking_talent = True
+        if request.form.get('seeking_talent'):
+            venue.seeking_talent = True
         venue.seeking_talent_desc = request.form.get('seeking_description')
     except:
         error = True
@@ -411,9 +418,11 @@ def edit_venue_submission(venue_id):
     finally:
         db.session.close()
     if not error:
-        flash('Venue ' + request.form['name'] + ' was successfully Updated')
+        flash('Venue ' + request.form['name'] +
+              ' was successfully Updated')
     else:
-        flash('An error occurred. Venue ' + request.form['name'] + ' can not be Updated.')
+        flash('An error occurred. Venue ' +
+              request.form['name'] + ' can not be Updated.')
     return redirect(url_for('show_venue', venue_id=venue_id))
 
 
@@ -456,7 +465,8 @@ def create_artist_submission():
     if not error:
         flash('Artist ' + request.form['name'] + ' was successfully listed!')
     else:
-        flash(f"An Error Occurred While adding the Artist, Artist {data['name']} Could not be added.")
+        flash(f"An Error Occurred While adding the Artist, "
+              f"Artist {data['name']} Could not be added.")
     return render_template('pages/home.html')
 
 
@@ -494,7 +504,9 @@ def create_show_submission():
     error = False
     try:
         data = request.form.to_dict()
-        show = Show(artist_id=data['artist_id'], venue_id=data['venue_id'], start_time=data['start_time'])
+        show = Show(artist_id=data['artist_id'],
+                    venue_id=data['venue_id'],
+                    start_time=data['start_time'])
         db.session.add(show)
         db.session.commit()
     except:
@@ -523,7 +535,8 @@ def server_error(error):
 if not app.debug:
     file_handler = FileHandler('error.log')
     file_handler.setFormatter(
-        Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
+        Formatter('%(asctime)s %(levelname)s: '
+                  '%(message)s [in %(pathname)s:%(lineno)d]')
     )
     app.logger.setLevel(logging.INFO)
     file_handler.setLevel(logging.INFO)
