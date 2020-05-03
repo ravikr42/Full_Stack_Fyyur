@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Fyyur1" uuid="5d3930ff-aba3-4d3f-a395-96d0011c0b33">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/fyyur1</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Fyyur" uuid="d50e72e0-4c81-464e-a028-ab5518f8deea">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/fyyur</jdbc-url>
+    </data-source>
+  </component>
+</project>
